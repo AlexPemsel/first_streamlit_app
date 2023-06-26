@@ -4,6 +4,7 @@ import requests
 import snowflake.connector
 from urllib.error import URLError
 
+###
 streamlit.title('My Parents New Healty Diner')
 
 streamlit.header('Breakfast Menu')
@@ -70,4 +71,18 @@ if streamlit.button('Add a Fruit to the list'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     streamlit.text(insert_row_snowflake(added_fruit))
     my_cnx.close()
+###
+#Zena's App for clothing
+def get_website_data():
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("select * from catalog_for_website")
+    my_data_rows = my_cur.fetchall()
+    return my_data_rows
 
+streamlit.title("Zena's Amazing Athleisure Catalog")
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+website_data = get_website_data()
+streamlit.dataframe(website_data)
+# color_list = list(website_data.color_or_style)
+# streamlit.multiselect("Pick a sweatsuit color or style:", color_list)
+# streamlit.image()
