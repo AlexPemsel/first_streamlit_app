@@ -73,12 +73,6 @@ from urllib.error import URLError
 #     my_cnx.close()
 ###
 #Zena's App for clothing
-def get_website_data():
-  with my_cnx.cursor() as my_cur:
-    my_cur.execute("select * from zenas_athleisure_db.products.catalog_for_website")
-    my_data_rows = my_cur.fetchall()
-    return my_data_rows
-
 streamlit.title("Zena's Amazing Athleisure Catalog")
 # connect to snowflake
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
